@@ -28,5 +28,5 @@ end
 cron_d 'chef-client' do
   minute node[:chef_client][:cron][:minute]
   hour node[:chef_client][:cron][:hour]
-  command "/bin/sleep #{node[:chef_client][:sleep_time]}; #{node[:chef_client][:bin]} > #{node[:chef_client][:log_file]} 2>&1"
+  command "/bin/sleep #{node[:chef_client][:sleep_time]}; #{node[:chef_client][:bin]} >> #{node[:chef_client][:log_file]} 2>&1"
 end
