@@ -21,7 +21,7 @@ if Chef::Config[:solo]
       "you must set node[:chef_client][:sleep_time] in chef-solo mode")
   end
 else
-  node.set_unless[:chef_client][:sleep_time] = ::Random.rand(10)
+  node.set_unless[:chef_client][:sleep_time] = rand(10)
   node.save
 end
 
