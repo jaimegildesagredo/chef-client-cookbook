@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.json = {
       :chef_client => {
         :bin => '/opt/ruby/bin/chef-client',
-        :sleep_time => 3
+        #:sleep_time => 3
       }
     }
   end

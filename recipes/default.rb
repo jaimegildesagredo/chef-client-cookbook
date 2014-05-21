@@ -15,15 +15,8 @@ directory node[:chef_client][:log_dir] do
   action :create
 end
 
-if Chef::Config[:solo]
-  if node[:chef_client][:sleep_time].nil?
-    Chef::Application.fatal!(
-      "you must set node[:chef_client][:sleep_time] in chef-solo mode")
-  end
-else
-  node.set_unless[:chef_client][:sleep_time] = rand(10)
-  node.save
-end
+node.set_unless[:chef_client][:sleep_time] = rand(10)
+node.save unless Chef::Config[:solo]
 
 cron_d 'chef-client' do
   minute node[:chef_client][:cron][:minute]
