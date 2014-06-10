@@ -1,23 +1,18 @@
 chef_client Cookbook
 ====================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Chef cookbook to setup chef-client as a periodic cron job.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - chef_client needs toaster to brown your bagel.
+* Chef 11 or higher
+* Ruby 1.8.7 or higher
+* The cron cookbook: https://github.com/opscode-cookbooks/cron
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### chef_client::default
 <table>
   <tr>
@@ -27,19 +22,47 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['chef_client']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['chef_client']['bin']</tt></td>
+    <td>String</td>
+    <td>The chef-client executable to be run by the cron job</td>
+    <td><tt>/usr/local/bin/chef-client</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_client']['sleep_time']</tt></td>
+    <td>Integer</td>
+    <td>Seconds to sleep before running chef-client. If nil it will be a random value</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_client']['log_dir']</tt></td>
+    <td>String</td>
+    <td>Directory where the chef-client log will be stored</td>
+    <td><tt>/var/log/chef-client</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_client']['log_file']</tt></td>
+    <td>String</td>
+    <td>The chef-client log path. By default relative to the log_dir attribute value</td>
+    <td><tt>/var/log/chef-client/chef-client.log</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_client']['cron']['minute']</tt></td>
+    <td>String</td>
+    <td>The minute argument for the cron job</td>
+    <td><tt>*/30</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_client']['cron']['hour']</tt></td>
+    <td>String</td>
+    <td>The hour argument for the cron job</td>
+    <td><tt>*</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### chef_client::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
 Just include `chef_client` in your node's `run_list`:
 
 ```json
@@ -50,19 +73,3 @@ Just include `chef_client` in your node's `run_list`:
   ]
 }
 ```
-
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors
